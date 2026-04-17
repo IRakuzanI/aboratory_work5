@@ -3,6 +3,7 @@ name: CI Pipeline
 on:
   push:
     branches: [ main, master ]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -73,4 +74,17 @@ jobs:
       image_name: frontend
       build_context: ./frontend
       dockerfile_path: ./frontend/Dockerfile
-      
+
+  deploy:
+    needs: [build-backend-release, build-frontend-release]
+    if: ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+      - shell: bash
+        run: |
+          export TAG=${{ github.sha }}
+          echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+          docker compose pull
+          docker compose up -d
+          
