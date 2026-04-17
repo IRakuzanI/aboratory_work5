@@ -5,5 +5,4 @@ RUN npm install
 
 FROM deps AS release
 COPY . .
-RUN npm run build
 CMD ["npm", "start"]
