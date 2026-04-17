@@ -1,5 +1,5 @@
 include:
-  - remote: 'https://gitlab.com/devops108031/laboratory_work6.1/-/raw/dev/docker-build.yml'
+  - remote: 'https://raw.githubusercontent.com/IRakuzanI/laboratory_work6.1/refs/heads/main/docker-build.yml'
 
 stages:
   - build-deps
