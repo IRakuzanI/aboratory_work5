@@ -31,7 +31,7 @@ jobs:
   build-backend-deps:
     needs: changes
     if: ${{ needs.changes.outputs.backend_deps == 'true' }}
-    uses: IRakuzanI/laboratory_work6.1/blob/main/.github/workflows/docker-build.yml@main
+    uses: IRakuzanI/laboratory_work6.1/.github/workflows/docker-build.yml@main
     with:
       image_name: backend-deps
       build_context: ./backend
@@ -41,7 +41,7 @@ jobs:
   build-backend-release:
     needs: changes
     if: ${{ needs.changes.outputs.backend_app == 'true' }}
-    uses: IRakuzanI/laboratory_work6.1/blob/main/.github/workflows/docker-build.yml@main
+    uses: IRakuzanI/laboratory_work6.1/.github/workflows/docker-build.yml@main
     with:
       image_name: backend
       build_context: ./backend
@@ -50,7 +50,7 @@ jobs:
   build-frontend-deps:
     needs: changes
     if: ${{ needs.changes.outputs.frontend_deps == 'true' }}
-    uses: IRakuzanI/laboratory_work6.1/blob/main/.github/workflows/docker-build.yml@main
+    uses: IRakuzanI/laboratory_work6.1/.github/workflows/docker-build.yml@main
     with:
       image_name: frontend-deps
       build_context: ./frontend
@@ -60,7 +60,7 @@ jobs:
   build-frontend-release:
     needs: changes
     if: ${{ needs.changes.outputs.frontend_app == 'true' }}
-    uses: IRakuzanI/laboratory_work6.1/blob/main/.github/workflows/docker-build.yml@main
+    uses: IRakuzanI/laboratory_work6.1/.github/workflows/docker-build.yml@main
     with:
       image_name: frontend
       build_context: ./frontend
