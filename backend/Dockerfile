@@ -1,20 +1,15 @@
-FROM python:3.10-alpine
+FROM python:3.10-alpine AS deps
 
+WORKDIR /app
+COPY requirements.txt .
 RUN apk update && \
     apk add --no-cache postgresql-libs && \
     apk add --no-cache --virtual .build-deps gcc musl-dev postgresql-dev && \
-    rm -rf /var/cache/apk/*
-
-RUN addgroup -S appgroup && adduser -S student -G appgroup
-WORKDIR /app
-
-COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r requirements.txt && \
     apk --purge del .build-deps
 
+FROM deps AS release
+
 COPY . .
-RUN chown -R student:appgroup /app
 
-USER student
-
-CMD ["python", "app.py"]
+CMD ["python", "main.py"] # Замени на свою команду запуска
