@@ -12,4 +12,4 @@ FROM deps AS release
 
 COPY . .
 
-CMD ["python", "main.py"] # Замени на свою команду запуска
+CMD ["python", "app.py"] # Замени на свою команду запуска
