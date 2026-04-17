@@ -1,15 +1,9 @@
-FROM node:18-alpine
-
-RUN apk update && rm -rf /var/cache/apk/*
-
-RUN addgroup -S appgroup && adduser -S student -G appgroup
+FROM node:18-alpine AS deps
 WORKDIR /app
-
 COPY package*.json ./
-RUN chown -R student:appgroup /app
-USER student
-
 RUN npm install
-COPY --chown=student:appgroup . .
 
+FROM deps AS release
+COPY . .
+RUN npm run build
 CMD ["npm", "start"]
