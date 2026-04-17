@@ -31,7 +31,7 @@ jobs:
   build-backend-deps:
     needs: changes
     if: ${{ needs.changes.outputs.backend_deps == 'true' }}
-    uses: ТВОЙ_АККАУНТ/ci-modules/.github/workflows/docker-build.yml@main
+    uses: IRakuzanI/laboratory_work6.1/blob/main/.github/workflows/docker-build.yml@main
     with:
       image_name: backend-deps
       build_context: ./backend
