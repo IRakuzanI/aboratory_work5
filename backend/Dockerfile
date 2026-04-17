@@ -13,4 +13,3 @@ FROM deps AS release
 COPY . .
 
 CMD ["python", "app.py"]
-
