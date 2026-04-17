@@ -24,13 +24,17 @@ jobs:
           filters: |
             backend_deps:
               - 'backend/requirements.txt'
+              - 'backend/Dockerfile'
             backend_app:
               - 'backend/**/*.py'
+              - 'backend/Dockerfile'
             frontend_deps:
               - 'frontend/package*.json'
+              - 'frontend/Dockerfile'
             frontend_app:
               - 'frontend/src/**/*'
               - 'frontend/public/**/*'
+              - 'frontend/Dockerfile'
 
   build-backend-deps:
     needs: changes
