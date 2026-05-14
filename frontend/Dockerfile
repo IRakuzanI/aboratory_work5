@@ -4,6 +4,7 @@ COPY package*.json ./
 RUN npm install
 
 FROM deps AS release
+
 COPY . .
 CMD ["npm", "start"]
 
