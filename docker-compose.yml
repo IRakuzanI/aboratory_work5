@@ -27,6 +27,7 @@ services:
     environment:
       - WDS_SOCKET_PORT=0 
 
+
   nginx-proxy:
     image: nginx:alpine
     ports:
