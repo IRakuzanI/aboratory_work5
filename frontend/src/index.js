@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom/client';
 const App = () => {
     return (
         <div style={{ textAlign: 'center', marginTop: '50px' }}>
-            <h1>Фронтенд успешно запущен!</h1>
+            <h1>Фронтенд успешно запущен</h1>
         </div>
     );
 };

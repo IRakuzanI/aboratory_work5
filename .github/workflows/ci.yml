@@ -1,6 +1,5 @@
 name: CI Pipeline
 
-
 on:
   push:
     branches: [ main, master ]
@@ -83,10 +82,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - shell: bash
+      - name: Clean up containers
         run: |
+          docker compose down || true
+          docker system prune -f || true
           export TAG=${{ github.sha }}
           
-          # Создаем файл .env из секретов Гитхаба
           echo "DB_USER=${{ secrets.DB_USER }}" > .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
