@@ -3,7 +3,6 @@ from flask import Flask, jsonify
 
 app = Flask(__name__)
 
-
 @app.route("/")
 def api_root():
     db_name = os.environ.get("DB_NAME", "unknown")

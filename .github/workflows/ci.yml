@@ -74,7 +74,7 @@ jobs:
       image_name: frontend
       build_context: ./frontend
       dockerfile_path: ./frontend/Dockerfile
-
+      
   deploy:
     needs: [build-backend-release, build-frontend-release]
     if: ${{ !contains(needs.*.result, 'failure') && !contains(needs.*.result, 'cancelled') }}
@@ -86,12 +86,14 @@ jobs:
           docker compose down || true
           docker system prune -f || true
           export TAG=${{ github.sha }}
-          
+          export NGINX_PORT=$((RANDOM % 10000 + 20000))
+          echo "Using random port: $NGINX_PORT"
           echo "DB_USER=${{ secrets.DB_USER }}" > .env
           echo "DB_PASSWORD=${{ secrets.DB_PASSWORD }}" >> .env
           echo "DB_NAME=${{ secrets.DB_NAME }}" >> .env
+          echo "NGINX_PORT=$NGINX_PORT" >> .env
           
           echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
           docker compose pull
           docker compose up -d
-          
+
