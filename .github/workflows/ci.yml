@@ -82,7 +82,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - shell: bash
-      - name: Clean up containers
         run: |
           docker compose down || true
           docker system prune -f || true
